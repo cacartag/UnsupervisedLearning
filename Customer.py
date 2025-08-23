@@ -129,23 +129,23 @@ print(rfm_table.describe())
 
 
 # Visualize RFM distributions
-fig, axes = plt.subplots(1,3, figsize=(15, 5))
+# fig, axes = plt.subplots(1,3, figsize=(15, 5))
 
-rfm_table['Recency'].hist(bins=50, ax=axes[0], alpha=0.7)
-axes[0].set_title('Recency Distribution')
-axes[0].set_xlabel('Days since last purchase')
+# rfm_table['Recency'].hist(bins=50, ax=axes[0], alpha=0.7)
+# axes[0].set_title('Recency Distribution')
+# axes[0].set_xlabel('Days since last purchase')
 
 
-rfm_table['Frequency'].hist(bins=50, ax=axes[1], alpha=0.7)
-axes[1].set_title('Frequency Distribution')
-axes[1].set_xlabel('Number of purchases')
+# rfm_table['Frequency'].hist(bins=50, ax=axes[1], alpha=0.7)
+# axes[1].set_title('Frequency Distribution')
+# axes[1].set_xlabel('Number of purchases')
 
-rfm_table['Monetary'].hist(bins=50, ax=axes[2], alpha=0.7)
-axes[2].set_title('Monetary Distribution')
-axes[2].set_xlabel('Total amount spent (£)')
+# rfm_table['Monetary'].hist(bins=50, ax=axes[2], alpha=0.7)
+# axes[2].set_title('Monetary Distribution')
+# axes[2].set_xlabel('Total amount spent (£)')
 
-plt.tight_layout()
-plt.show()
+# plt.tight_layout()
+# plt.show()
 
 
 
