@@ -151,11 +151,57 @@ print(rfm_table.describe())
 
 
 
+# Customer Segmentation with K-Means
 
 
 
+# Prepare data for clustering
+# Log transform monetary values to handle skewness
+rfm_log = rfm_table.copy()
+rfm_log['Monetary'] = np.log1p(rfm_log['Monetary'])
+
+# Standardize the features
+scaler = StandardScaler()
+rfm_scaled = scaler.fit_transform(rfm_log)
+
+# Find optimal number of clusters using elbow method and silhouette score
+inertias = []
+silhouette_scores = []
+k_range = range(2, 11)
+
+for k in k_range:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(rfm_scaled)
+    inertias.append(kmeans.inertia_)
+    silhouette_scores.append(silhouette_score(rfm_scaled, kmeans.labels_))
+
+# Plot elbow curve and silhouette scores
+# fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+# ax1.plot(k_range, inertias, 'bo-')
+# ax1.set_xlabel('Number of clusters (k)')
+# ax1.set_ylabel('Inertia')
+# ax1.set_title('Elbow Method')
+# ax1.grid(True)
+
+# ax2.plot(k_range, silhouette_scores, 'ro-')
+# ax2.set_xlabel('Number of Clusters (k)')
+# ax2.set_ylabel('Silhouette Score')
+# ax2.set_title('Silhouette Analysis')
+# ax2.grid(True)
+
+# plt.tight_layout()
+# plt.show()
 
 
+optimal_k = 4
+kmeans_final = KMeans(n_clusters=optimal_k, random_state=42, n_init=10)
+cluster_labels = kmeans_final.fit_predict(rfm_scaled)
+
+rfm_table['Cluster'] = cluster_labels
+
+print(f"Silhouette Score for k{optimal_k}: {silhouette_score(rfm_scaled, cluster_labels):.3f}")
+print(f"Calinski-Harabasz Score: {calinski_harabasz_score(rfm_scaled, cluster_labels):.3f}")
 
 
 
